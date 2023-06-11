@@ -1,4 +1,5 @@
 #include "star_window.hpp"
+#include "../mesh/star_mesh.hpp"
 #include <iostream>
 
 void star_window::framebuffer_size_callback(GLFWwindow *window, int width, int height) {
@@ -33,72 +34,22 @@ star_window::star_window(char *title, int width, int height) : m_title(title), m
 
 // The game loop
 void star_window::Run(std::function<void()> run_loop) {
-    float vertices[] = {
-        0.0f / 800, -500.0f / 600, 0.0f,
-        500.0f / 800, -500.0f / 600, 0.0f,
-        250.0f / 800, 0.0f / 600, 0.0f};
+    // std::vector<Vertex> vertices = {
+    //     Vertex{glm::vec3(0.0f / 800, -500.0f / 600, 0.0f)},
+    //     Vertex{glm::vec3(500.0f / 800, -500.0f / 600, 0.0f)},
+    //     Vertex{glm::vec3(250.0f / 800, 0.0f / 600, 0.0f)}};
+    std::vector<Vertex> vertices = {
+        Vertex{glm::vec3(0.5f, 0.5f, 0.0f)},   // top right
+        Vertex{glm::vec3(0.5f, -0.5f, 0.0f)},  // bottom right
+        Vertex{glm::vec3(-0.5f, -0.5f, 0.0f)}, // bottom left
+        Vertex{glm::vec3(-0.5f, 0.5f, 0.0f)}};
 
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    std::vector<uint32_t>
+        indices{0, 1, 3, // first Triangle
+                1, 2, 3};
 
-    unsigned int VAO;
-    glGenVertexArrays(1, &VAO);
-
-    const char *vertexShaderSource = "#version 330 core\n"
-                                     "layout (location = 0) in vec3 aPos;\n"
-                                     "void main()\n"
-                                     "{\n"
-                                     "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-                                     "}\0";
-
-    unsigned int vertexShader;
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    glCompileShader(vertexShader);
-
-    int success;
-    char infoLog[512];
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-
-    if (!success) {
-        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
-                  << infoLog << std::endl;
-    }
-
-    const char *fragmentShaderSource = R"(
-#version 330 core
-out vec4 FragColor;
-
-void main()
-{
-    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
-} 
-    )";
-
-    unsigned int fragmentShader;
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    glCompileShader(fragmentShader);
-
-    unsigned int shaderProgram;
-    shaderProgram = glCreateProgram();
-
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-
-    glUseProgram(shaderProgram);
-
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-
-    glBindVertexArray(VAO);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
-    glEnableVertexAttribArray(0);
+    star_mesh mesh(vertices, indices);
+    default_shader m_shader;
 
     // Run the while loop until the window should close
     while (!glfwWindowShouldClose(m_window)) {
@@ -106,10 +57,7 @@ void main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         // run the user handled run loop
         run_loop();
-
-        glUseProgram(shaderProgram);
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        mesh.draw(m_shader);
 
         glfwSwapBuffers(m_window);
         glfwPollEvents();
