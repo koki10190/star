@@ -2,10 +2,15 @@
 #define STAR_WINDOW_HPP
 #include <glad/include/glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_opengl3.h>
+#include <imgui/imgui_impl_glfw.h>
 
 #include <functional>
 class star_window {
 public:
+    static inline star_window *instance;
+
     static inline void framebuffer_size_callback(GLFWwindow *window, int width, int height);
     star_window(char *title, int width, int height);
     ~star_window();
