@@ -9,7 +9,8 @@
 
 int main(int argc, char **argv) {
     star_window window("Test", 1280, 720);
-    star_sprite sprite(glm::vec2(500, 0), glm::vec2(1, 1));
+    star_sprite sprite("assets/cool.png", glm::vec2((1280.f / 2) - (200.f / 2), (720.f / 2) - (200.f / 2)), glm::vec2(200, 200));
+    sprite.set_texture("assets/cool.png", false);
 
     double previousTime = glfwGetTime();
     int frameCount = 0;
@@ -44,9 +45,9 @@ int main(int argc, char **argv) {
             sprite.position.x -= 1;
         }
 
-        star_overlay ui([&] {
-            star_text text(fps_text, glm::vec2(5, 0));
-        });
+        // star_overlay ui([&] {
+        //     star_text text(fps_text, glm::vec2(5, 0));
+        // });
     });
 
     return 0;

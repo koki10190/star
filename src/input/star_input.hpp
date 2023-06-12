@@ -6,7 +6,9 @@
 class star_input {
 public:
     static inline bool key_down(int key) {
+        // Get a keys state
         int state = glfwGetKey(star_window::instance->get_glfw_window(), key);
+        // Check if the key is pressed down
         if (state == GLFW_PRESS) {
             return true;
         }
@@ -15,7 +17,9 @@ public:
     }
 
     static inline bool key_up(int key) {
+        // Get a keys state
         int state = glfwGetKey(star_window::instance->get_glfw_window(), key);
+        // Check if the key is pressed down
         if (state == GLFW_RELEASE) {
             return true;
         }

@@ -24,7 +24,8 @@ MINGW_COMPILER = x86_64-w64-mingw32-g++
 GNU_LINUX_COMPILER = g++
 
 build_lib:
-
+	g++ -c $(SOURCE_LIB) $(FLAGS)
+	make build_linux
 
 build_linux:
 	g++ -c $(SOURCE) $(FLAGS)

@@ -11,6 +11,7 @@
 // Vertex structure
 struct Vertex {
     glm::vec3 position;
+    glm::vec2 tex_coords;
 };
 
 class star_mesh {

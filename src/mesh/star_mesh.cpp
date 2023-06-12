@@ -22,6 +22,9 @@ star_mesh::star_mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices
     glBindVertexArray(VAO);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
     glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, tex_coords));
+    glEnableVertexAttribArray(1);
 }
 
 // This function draws the mesh on the screen
