@@ -6,7 +6,7 @@
 
 class star_text {
 public:
-    star_text(const std::string &text, glm::vec2 pos = glm::vec2(0, 0));
+    star_text(const std::string &text, glm::vec2 pos = glm::vec2(0, 0), bool set_pos = true);
 };
 
 #endif

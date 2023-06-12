@@ -2,9 +2,10 @@
 #include <iostream>
 #include <string>
 #include "classes/star_sprite.hpp"
+#include "imgui/imgui.h"
 #include "input/star_input.hpp"
 #include "overlay/star_overlay.hpp"
-#include "ui/star_text.hpp"
+#include "ui/star_ui.hpp"
 #include "window/star_window.hpp"
 #include "classes/star_graphic.hpp"
 
@@ -44,6 +45,10 @@ int main(int argc, char **argv) {
 
         star_overlay ui([&] {
             star_text text(fps_text, glm::vec2(5, 0));
+        });
+
+        star_panel panel("Title", [&] {
+            star_text text("Hello!", glm::vec2(0, 0), false);
         });
     });
 
