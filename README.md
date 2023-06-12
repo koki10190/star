@@ -1,3 +1,27 @@
-# STAR
+<div align="center">
+<img src="assets/logo.png">
+<h2 style="font-size: 54px">☆ star ☆</h2>
+<h1 style="font-size: 25px">2D Rendering Library made with OpenGL</h1>
+</div>
 
-This is a work in progress project so it might not compile on your computer just yet
+# What is ☆ star ☆?
+
+Star is a **2D Rendering Library** made with OpenGL \
+It's goal is to make setting up GLFW & OpenGL easier \
+It supports ImGui for UIs so **☆ star ☆** is a good way to setup an ImGui Enviroment
+
+# Supported Platforms
+
+- Linux
+- Windows (Coming Soon)
+
+# Used Libraries
+
+- GLFW
+- GLAD
+- stb_image
+- ImGui
+
+# Will it have any language bindings?
+
+I'm thinking of adding JavaScript bindings and maybe C# in the future!

@@ -33,4 +33,3 @@ build_linux:
 	g++ bin/*.o -o $(LINUX_BINARY) $(FLAGS)
 	mv $(LINUX_BINARY) bin/linux
 	./star.sh
-
