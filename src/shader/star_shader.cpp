@@ -85,7 +85,9 @@ default_shader::default_shader() : star_shader(
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec2 texCoord;
 uniform vec2 m_pos;
+uniform mat4 model;
 out vec2 tex_coords;
+
 void main()
 {
    gl_Position = vec4(aPos.x + (m_pos.x * 2), aPos.y + -(m_pos.y * 2), aPos.z, 1.0);
@@ -97,10 +99,14 @@ out vec4 FragColor;
 
 in vec2 tex_coords;
 uniform sampler2D sprite;
+uniform vec4 m_color;
 
 void main()
 {
     vec4 tex = texture(sprite, tex_coords);
     if(tex.a < 0.1) discard;
-    FragColor = tex;
+    if(tex.rgb == vec3(0))
+        FragColor = vec4(m_color.rgb / 255, m_color.a);
+    else 
+        FragColor = vec4(tex.rgb * (m_color.rgb / 255), tex.a * (m_color.a / 255));
 })") {}

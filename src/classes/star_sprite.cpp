@@ -2,6 +2,8 @@
 #include <iostream>
 #include <memory>
 #include "../window/star_window.hpp"
+#include "glm/ext/matrix_transform.hpp"
+#include "glm/trigonometric.hpp"
 
 star_sprite::star_sprite(const char *texture_path, glm::vec2 pos, glm::vec2 scale) : star_mesh(
                                                                                          {Vertex{
@@ -27,6 +29,13 @@ void star_sprite::show() {
     m_shader.bind();
     texture->bind(0);
     m_shader.uniform_int("sprite", 0);
+
+    glm::mat4 mat(0);
+    mat = glm::rotate(mat, glm::radians(this->rotation), glm::vec3(0, 0, 1)) * glm::scale(mat, glm::vec3(1, 1, 1));
+    m_shader.uniform_mat4("model", mat);
+
+    m_shader.uniform_vec4("m_color", material.color);
+
     this->draw(m_shader, star_window::instance->get_glfw_window());
 }
 

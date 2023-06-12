@@ -4,6 +4,7 @@
 #include "../mesh/star_mesh.hpp"
 #include "../texture/star_texture.hpp"
 #include <memory>
+#include "star_material.hpp"
 
 class star_sprite : public star_mesh {
 private:
@@ -19,6 +20,8 @@ public:
     void set_texture(const char *texture_path, bool nearest = true) {
         texture = std::make_unique<star_texture>(texture_path, nearest);
     }
+
+    star_material material;
 };
 
 #endif
