@@ -7,6 +7,9 @@
 #include <imgui/imgui_impl_glfw.h>
 
 #include <functional>
+
+namespace star_gui = ImGui;
+
 class star_window {
 public:
     static inline star_window *instance;
