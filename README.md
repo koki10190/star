@@ -1,7 +1,7 @@
 <div align="center">
 <img src="assets/logo.png">
-<h2 style="font-size: 54px">☆ star ☆</h2>
-<h1 style="font-size: 25px">2D Rendering Library made with OpenGL</h1>
+<h1>☆ star ☆</h1>
+<h2>2D Rendering Library made with OpenGL</h2>
 </div>
 
 # What is ☆ star ☆?

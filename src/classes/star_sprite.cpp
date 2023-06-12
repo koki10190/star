@@ -18,7 +18,7 @@ star_sprite::star_sprite(const char *texture_path, glm::vec2 pos, glm::vec2 scal
                                                                                               glm::vec2(0, 1)}},
                                                                                          {0, 1, 3,
                                                                                           1, 2, 3}) {
-    texture = std::make_unique<star_texture>(texture_path, false);
+    set_texture(texture_path, false);
     this->position = pos;
     this->scale = scale;
 }
