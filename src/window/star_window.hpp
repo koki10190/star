@@ -14,7 +14,7 @@ public:
     static inline void framebuffer_size_callback(GLFWwindow *window, int width, int height);
     star_window(char *title, int width, int height);
     ~star_window();
-    void Run(std::function<void()> run_loop);
+    void run(std::function<void()> run_loop);
 
     // Get the private variables as a constant
     int get_width() const { return m_width; };

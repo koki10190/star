@@ -5,10 +5,6 @@
 class star_overlay {
 public:
     star_overlay(std::function<void()> overlay_loop);
-    void show();
-
-private:
-    std::function<void()> m_loop;
 };
 
 #endif

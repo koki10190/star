@@ -51,7 +51,7 @@ star_window::star_window(char *title, int width, int height) : m_title(title), m
 }
 
 // The game loop
-void star_window::Run(std::function<void()> run_loop) {
+void star_window::run(std::function<void()> run_loop) {
     // Run the while loop until the window should close
     while (!glfwWindowShouldClose(m_window)) {
         // clear the buffer bit
